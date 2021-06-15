@@ -176,7 +176,7 @@ class AbstractBaseCallbackTokenSerializer(serializers.Serializer):
     print('used2')
 
     email = serializers.EmailField(required=False)  # Needs to be required=false to require both.
-    mobile = serializers.CharField(required=False, validators=[phone_regex], max_length=13)
+    mobile = serializers.CharField(required=False, max_length=13)
     token = TokenField(min_length=6, max_length=6, validators=[token_age_validator])
 
     def validate_alias(self, attrs):
