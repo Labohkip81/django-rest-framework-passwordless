@@ -88,6 +88,7 @@ class MobileAuthSerializer(AbstractBaseAliasAuthenticationSerializer):
     phone_regex = RegexValidator(regex=r'^\+254\d{1,9}$',
                                  message="Mobile number must be entered in the format:"
                                          " '+254712345678'. Up to 13 digits allowed.")
+    print('used1')
     mobile = serializers.CharField(validators=[phone_regex], max_length=13)
 
 
@@ -172,6 +173,7 @@ class AbstractBaseCallbackTokenSerializer(serializers.Serializer):
     phone_regex = RegexValidator(regex=r'^\+254\d{1,9}$',
                                  message="Mobile number must be entered in the format:"
                                          " '+254712345678'. Up to 13 digits allowed.")
+    print('used2')
 
     email = serializers.EmailField(required=False)  # Needs to be required=false to require both.
     mobile = serializers.CharField(required=False, validators=[phone_regex], max_length=13)
