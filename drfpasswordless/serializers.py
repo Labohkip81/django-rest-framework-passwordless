@@ -89,7 +89,7 @@ class MobileAuthSerializer(AbstractBaseAliasAuthenticationSerializer):
                                  message="Mobile number must be entered in the format:"
                                          " '+254712345678'. Up to 13 digits allowed.")
     print('used1')
-    mobile = serializers.CharField(validators=[phone_regex], max_length=13)
+    mobile = serializers.CharField(max_length=13)
 
 
 """
