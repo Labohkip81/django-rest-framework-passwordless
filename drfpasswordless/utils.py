@@ -201,7 +201,9 @@ def send_sms_with_callback_token(user, mobile_token, **kwargs):
             # )
             print(to_number)
             message =  f"Welcome to Afyapay, use otp {mobile_token.key} for authentication."
-            sms.send(message, [to_number,])
+            response = sms.send(message, [to_number,])
+            print(response)
+            
             return True
         else:
             logger.debug("Failed to send token sms. Missing PASSWORDLESS_MOBILE_NOREPLY_NUMBER.")
