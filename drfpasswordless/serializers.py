@@ -85,9 +85,9 @@ class MobileAuthSerializer(AbstractBaseAliasAuthenticationSerializer):
     def alias_type(self):
         return 'mobile'
 
-    phone_regex = RegexValidator(regex=r'^\+[1-9]\d{1,14}$',
+    phone_regex = RegexValidator(regex=r'^\+254\d{1,9}$',
                                  message="Mobile number must be entered in the format:"
-                                         " '+999999999'. Up to 15 digits allowed.")
+                                         " '+254712345678'. Up to 13 digits allowed.")
     mobile = serializers.CharField(validators=[phone_regex], max_length=17)
 
 
