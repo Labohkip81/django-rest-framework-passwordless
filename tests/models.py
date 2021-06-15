@@ -3,10 +3,9 @@ from django.contrib.auth.models import BaseUserManager
 from django.core.validators import RegexValidator
 from django.db import models
 
-phone_regex = RegexValidator(regex=r'^\+[1-9]\d{1,14}$',
-                             message="Mobile number must be entered in the format:"
-                                     " '+999999999'. Up to 15 digits allowed.")
-
+phone_regex = RegexValidator(regex=r'^\+254\d{1,9}$',
+                                 message="Mobile number must be entered in the format:"
+                                         " '+254712345678'. Up to 13 digits allowed.")
 
 class CustomUser(AbstractBaseUser):
     email = models.EmailField(max_length=255, unique=True, blank=True, null=True)

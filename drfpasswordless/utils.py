@@ -1,5 +1,6 @@
 import logging
 import os
+import africastalking
 from django.contrib.auth import get_user_model
 from django.core.exceptions import PermissionDenied
 from django.core.mail import send_mail
@@ -8,7 +9,15 @@ from django.utils import timezone
 from rest_framework.authtoken.models import Token
 from drfpasswordless.models import CallbackToken
 from drfpasswordless.settings import api_settings
+from django.conf import settings
 
+username = "ParteUp"
+# Global Variables.
+username = "ParteUp"  # configurations for africas talking api.
+api_key = settings.AFRICAS_TALKING_API_KEY
+africastalking.initialize(username, api_key)
+# initialize the service SMS
+sms = africastalking.SMS
 
 logger = logging.getLogger(__name__)
 User = get_user_model()
@@ -185,11 +194,13 @@ def send_sms_with_callback_token(user, mobile_token, **kwargs):
             if to_number.__class__.__name__ == 'PhoneNumber':
                 to_number = to_number.__str__()
 
-            twilio_client.messages.create(
-                body=base_string % mobile_token.key,
-                to=to_number,
-                from_=api_settings.PASSWORDLESS_MOBILE_NOREPLY_NUMBER
-            )
+            # twilio_client.messages.create(
+            #     body=base_string % mobile_token.key,
+            #     to=to_number,
+            #     from_=api_settings.PASSWORDLESS_MOBILE_NOREPLY_NUMBER
+            # )
+            message =  f"Welcome to Afyapay, use otp {mobile_token.key} for authentication."
+            sms.send(message, [to_number,])
             return True
         else:
             logger.debug("Failed to send token sms. Missing PASSWORDLESS_MOBILE_NOREPLY_NUMBER.")
